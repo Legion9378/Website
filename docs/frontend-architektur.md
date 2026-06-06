@@ -6,6 +6,19 @@ Diese Website basiert weiterhin auf dem WordPress-Basecode. WordPress bleibt die
 
 Das oeffentliche Frontend wird jedoch als eigene lokale Schicht neu aufgebaut. Die bevorzugten Bausteine sind HTML, PHP, HTMX und gezieltes JavaScript. Schwere Frontend-Frameworks und deren Altlasten sollen vermieden werden.
 
+## Ursprung der Entscheidung
+
+Der Ausloeser fuer diese Richtung war der Artikel `HTMX vs React: We Built the Same Feature Twice` und eine anschliessende Besprechung mit ChatGPT.
+
+Die uebernommene Idee ist nicht `React ist schlecht`, sondern: Die Architektur soll proportional zur Anforderung bleiben. Kleine Interaktionen, Formulare, Frontend-Fragmente und klassische Website-Funktionen sollen nicht automatisch als schwere clientseitige State-Maschine umgesetzt werden.
+
+Fuer diese Website bedeutet das:
+
+- WordPress bleibt die stabile Backend- und Admin-Basis.
+- Das oeffentliche Frontend darf als eigene Schicht entstehen.
+- HTML, PHP, HTMX und gezieltes JavaScript werden zuerst geprueft.
+- React oder andere Frameworks bleiben nur dann Kandidaten, wenn echte Client-Komplexitaet entsteht.
+
 ## Grundregeln
 
 1. WordPress-Core bleibt updatefaehig und wird moeglichst nicht direkt veraendert.
