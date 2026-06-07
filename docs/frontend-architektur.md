@@ -27,6 +27,7 @@ Fuer diese Website bedeutet das:
 4. Es wird kein Code aus bestehenden Vorlagen kopiert, wenn daraus eigene lokale Bausteine entstehen.
 5. Neue Plugins, Module, Erweiterungen und Designs muessen zum neuen HTML/PHP/HTMX/JavaScript-Frontend passen.
 6. Jede Frontend-Entscheidung soll die Abhaengigkeit von schwergewichtigen Framework-Strukturen reduzieren.
+7. KI-Hintergrundsteuerung fuer User-Interaktion oder aktive Seitenlogik ist kein Ziel dieser Website-Architektur.
 
 ## Geplante Schichten
 
@@ -64,7 +65,8 @@ Plugins, Module, Erweiterungen und Designs werden lokal erstellt. Sie sollen:
 - keine unnoetigen externen Abhaengigkeiten einfuehren
 - updatefaehig neben dem WordPress-Core existieren
 - die neue Frontend-Schicht respektieren
-- bestehende WordPress-Muster nur als Referenz nutzen
+- bestehende WordPress-Muster, Plugins und Module nur als Referenz nutzen
+- eigenstaendig programmiert werden und keinen Code aus fremden Plugins oder Modulen uebernehmen
 
 ## Arbeitsregel
 
