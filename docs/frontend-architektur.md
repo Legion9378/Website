@@ -68,6 +68,30 @@ Plugins, Module, Erweiterungen und Designs werden lokal erstellt. Sie sollen:
 - bestehende WordPress-Muster, Plugins und Module nur als Referenz nutzen
 - eigenstaendig programmiert werden und keinen Code aus fremden Plugins oder Modulen uebernehmen
 
+
+
+## Auth / User-Management (Kandidat)
+
+AlsAuth-Baustein für die Website wird das **Rotorcipher-Pepper-Design** geprüft (siehe `kb/password-rotor-pepper-pattern.md`):
+
+- Eigenes Passwort-Design: Rotorcipher (100 Rotoren + 4 Reflektoren) als fixer Pepper vor Argon2id
+- Pure PHP 7.4+/8.x, Webhosting-kompatibel, keine externen Dependencies
+- Ersetzt `wp_hash_password` / `wp_check_password` via Plugin oder `mu-plugins`
+- Separate User-Encryption (25 Rotoren) für PII (E-Mail, Adresse, etc.) mit Canvas/SVG-Rendering
+- Admin-Encryption (50 Rotoren) für System-Secrets, API-Keys, Config
+
+### 🚫 BLOCKER (müssen gelöst sein vor Integration)
+
+| # | Blocker | Beschreibung | Priorität |
+|---|---|---|---|
+| **B1** | **KDF/HMAC-Ableitung für Steps/Dirs** | Unsicherer `srand`-Platzhalter in `rotor_preprocess_password()` → **HMAC/KDF von Master-Key** nötig | **KRITISCH** |
+| **B2** | **HMAC über Metadaten** | User/Admin-Encryption Metadaten ohne Integritätsschutz → **Manipulation möglich** | **KRITISCH** |
+| **B3** | **Key-Rotation / Migration** | Pepper-Wechsel = **alle Hashes ungültig** → **Migration-Pfad fehlt** | **HOCH** |
+| **B4** | **Security-Audit** | Eigenes Krypto → **externe Review nötig** (Side-Channel, Timing, Alphabet) | **KRITISCH** |
+| **B5** | **WP-Plugin / Micro-Service Integration** | `wp_hash_password` Override via `mu-plugins` oder Micro-Service → **Entscheidung & Implementation** | **HOCH** |
+
+Status: **Analyse-Kandidat** — **5 BLOCKER offen**, erst nach **ALLE gelöst** + Hardening + Tests setzen.
+
 ## Arbeitsregel
 
 Bei jeder neuen Anpassung zuerst pruefen:
