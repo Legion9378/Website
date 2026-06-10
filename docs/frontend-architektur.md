@@ -70,6 +70,34 @@ Plugins, Module, Erweiterungen und Designs werden lokal erstellt. Sie sollen:
 
 
 
+## Nachschaerfung: Website getrennt vom KI-Netzwerk
+
+Quelle: Chat-History `chatgpt-frontend-in-wordpress-2026-05-07T07-26-36-139Z.md`.
+
+Die Website-Architektur wird bewusst vom KI-Netzwerk getrennt:
+
+- WordPress ist Website-CMS, Admin- und Content-Basis.
+- WordPress ist nicht KI-Netzwerk-Frontend, nicht Control Plane und nicht OpenClaw-/Hermes-/LocalAI-Oberflaeche.
+- Das oeffentliche Website-Frontend wird als eigene HTML/PHP/HTMX/JavaScript-Schicht geplant.
+- HTMX wird als Server-driven-UI-Werkzeug genutzt: Der Server liefert fertige HTML-Seiten oder Fragmente; das Frontend fragt gezielt nach und haelt keine schwere SPA-State-Logik.
+- React/Vue/SPA-Frameworks bleiben nur Kandidaten, wenn echte Client-Komplexitaet entsteht, die mit HTML/PHP/HTMX nicht sauber loesbar ist.
+
+### Spaeterer Coding-Pfad
+
+Die spaetere Implementierung soll in diesem Repo erfolgen (`/home/work/Local-git/Website`) und sich an folgenden Regeln orientieren:
+
+1. WordPress-Core nicht direkt veraendern.
+2. Erst pruefen, ob Theme, Child-Theme, Plugin, MU-Plugin, Hook/Filter oder eigenes Modul reicht.
+3. Oeffentliche UI bevorzugt als serverseitig gerenderte HTML/PHP/HTMX-Komponenten bauen.
+4. WordPress REST API oder eigene Endpoints nur mit klarer Daten- und Rechte-Grenze nutzen.
+5. Bestehende WordPress- und Plugin-Strukturen duerfen als Referenz gelesen werden, aber nicht als Code-Copy in eigene Module uebernommen werden.
+6. Website-User-Interaktion nicht automatisch an KI-Hintergrundlogik koppeln.
+7. Auth-/Paywall-/Member-Bereiche erst nach eigener Sicherheits- und Datenflussplanung implementieren.
+
+## Verwandte Website-Module
+
+- [Fiction-Modul](fiction-modul.md): eigenstaendiges HTML/PHP/MySQL-Modul fuer Original-Stories, Fanfiction, Autoren, Reviews, Online-Lesen und serverseitige Downloads inklusive MOBI.
+
 ## Auth / User-Management (Kandidat)
 
 AlsAuth-Baustein für die Website wird das **Rotorcipher-Pepper-Design** geprüft (siehe `kb/password-rotor-pepper-pattern.md`):
